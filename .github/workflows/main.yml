@@ -111,4 +111,4 @@ jobs:
             cd ./kittygram
 
             echo "Запускакм файл docker-compose"
-            sudo docker-compose -f docker-compose.yml pull  
+            sudo docker compose -f docker-compose.yml pull  
