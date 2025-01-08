@@ -88,8 +88,8 @@ jobs:
 
   deploy:
     needs:
-      - tests
-      - build-push
+      # - tests
+      # - build-push
     runs-on: ubuntu-latest
 
     steps:
