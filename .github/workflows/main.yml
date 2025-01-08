@@ -87,7 +87,7 @@ jobs:
   #         tags: ${{ secrets.DOCKER_LOGIN }}/kittygram_gateway:latest
 
   deploy:
-    needs:
+    # needs:
       # - tests
       # - build-push
     runs-on: ubuntu-latest
