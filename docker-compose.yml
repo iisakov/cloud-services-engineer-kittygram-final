@@ -7,21 +7,23 @@ services:
   db:
     image: postgres:13.10
     env_file: .env
+    # restart: always
     volumes:
       - pg_data:/var/lib/postgresql/data
 
   backend:
     image: iisakov/kittygram_backend
     env_file: .env
+    # restart: always
     depends_on:
       - db
     volumes:
       - static:/backend_static
       - media:/app/media
-    entrypoint: /bin/sh -c "python manage.py migrate"
 
   frontend:
     env_file: .env
+    # restart: always
     image: iisakov/kittygram_frontend
     command: cp -r /app/build/. /frontend_static/
     volumes:
@@ -31,6 +33,7 @@ services:
     image: iisakov/kittygram_gateway
     ports:
       - 80:80
+    # restart: always
     volumes:
       - static:/static
       - media:/media
