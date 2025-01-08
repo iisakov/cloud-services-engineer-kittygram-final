@@ -34,7 +34,7 @@ jobs:
       run: python -m flake8 backend/
   
   # Сборка образа и загрузка в Docker Hub
-  build->push:
+  build-push:
     # Разворачиваем окружение:
     runs-on: ubuntu-latest
 
