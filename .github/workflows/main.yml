@@ -6,6 +6,7 @@ on:
       - main
 
 jobs:
+  # тест проекта
   tests:
     # Разворачиваем окружение:
     runs-on: ubuntu-latest
@@ -31,3 +32,34 @@ jobs:
       # Вызываем flake8 и указываем ему,
       # что нужно проверить файлы только в папке backend/
       run: python -m flake8 backend/
+  
+  # Сборка образа и загрузка в Docker Hub
+  build->push:
+    # Разворачиваем окружение:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Логинимся в Docker Hub
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_LOGIN }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    # Билдим и пушим backend
+    - name: build->push backend image
+      run: |
+        docker build -t ${{ secrets.DOCKER_LOGIN }}/kittygram_backend:latest backend
+        docker push ${{ secrets.DOCKER_USERNAME }}/kittygram_backend:latest
+
+    # Билдим и пушим frontend
+    - name: build->push frontend image
+      run: |
+        docker build -t ${{ secrets.DOCKER_LOGIN }}/kittygram_frontend:latest frontend
+        docker push ${{ secrets.DOCKER_USERNAME }}/kittygram_frontend:latest
+
+    # Билдим и пушим gateway
+    - name: build->push gateway image
+      run: |
+        docker build -t ${{ secrets.DOCKER_LOGIN }}/kittygram_gateway:latest nginx
+        docker push ${{ secrets.DOCKER_USERNAME }}/kittygram_gateway:latest
