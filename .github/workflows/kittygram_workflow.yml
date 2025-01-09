@@ -129,6 +129,7 @@ jobs:
             sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate
             sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic
             sudo docker compose -f docker-compose.production.yml exec backend cp -r /app/collected_static/. /backend_static/static/
+            sudo docker image prune
   
   # Тестирование на сервере
   server_tests:
@@ -160,5 +161,7 @@ jobs:
             to: ${{ secrets.TELEGRAM_TO }}
             token: ${{ secrets.TELEGRAM_TOKEN }}
             message: |
-              \[by_Artisan\] - ${{ github.actor }} создал ${{ github.event.name }}.
-              ${{ github.repository }}
+              [by_Artisan] - ${{ github.actor }} запушил изменения для ${{ github.repository }}.
+              Айда смотреть изменения https://github.com/${{ github.repository }}/commit/${{github.sha}}
+              сообщение в коммите ${{ github.event.commits[0].message }}
+            sticker: CAADBQADiQMAAukKyAPZH7wCI2BwFxYE
