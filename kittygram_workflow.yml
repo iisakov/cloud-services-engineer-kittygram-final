@@ -160,5 +160,5 @@ jobs:
             to: ${{ secrets.TELEGRAM_TO }}
             token: ${{ secrets.TELEGRAM_TOKEN }}
             message: |
-              \[by_Artisan\] - ${{ github.actor }} создал ${{ github.event.name }}.
-              ${{ github.repository }}
+              [by_Artisan] - ${{ github.actor }} запушил изменения для ${{ github.repository }}.
+              Айда смотреть изменения https://github.com/${{ github.repository }}/commit/${{github.sha}}
