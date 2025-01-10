@@ -10,7 +10,9 @@ jobs:
   tests:
     # Разворачиваем окружение:
     runs-on: ubuntu-latest
-
+      strategy:
+        matrix:
+          python-version: ["3.8", "3.9", "3.10"]
     steps:
     # Копируем код проекта:
     - name: Check out code
@@ -18,10 +20,6 @@ jobs:
     # Устанавливаем Python с помощью action:
     - name: Set up Python
       uses: actions/setup-python@v4
-    # В action setup-python@v4 передаём параметр — версию Python:
-      strategy:
-        matrix:
-          python-version: ["3.8", "3.9", "3.10"]
     # Обновляем pip, устанавливаем flake8 и flake8-isort, 
     # устанавливаем зависимости проекта:
     - name: Install dependencies
