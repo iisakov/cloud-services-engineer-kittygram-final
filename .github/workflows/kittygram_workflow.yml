@@ -10,9 +10,9 @@ jobs:
   tests:
     # Разворачиваем окружение:
     runs-on: ubuntu-latest
-      strategy:
-        matrix:
-          python-version: ["3.8", "3.9", "3.10"]
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10"]
     steps:
     # Копируем код проекта:
     - name: Check out code
