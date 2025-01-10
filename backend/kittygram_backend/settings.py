@@ -7,9 +7,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY', get_random_secret_key())
 
-DEBUG = os.getenv('DEBUG_VALUE', default='False')
+DEBUG = os.getenv('DEBUG_VALUE', default='False') == 'True'
 
-ALLOWED_HOSTS = ALLOWED_HOSTS = os.getenv('ALLOWED_HOST', '*').split(', ')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOST', '*').split(', ')
 
 STATIC_ROOT = "/app/collected_static"
 

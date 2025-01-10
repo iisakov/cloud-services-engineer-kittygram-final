@@ -162,6 +162,10 @@ jobs:
             token: ${{ secrets.TELEGRAM_TOKEN }}
             message: |
               [by_Artisan] - ${{ github.actor }} запушил изменения для ${{ github.repository }}.
-              Айда смотреть изменения https://github.com/${{ github.repository }}/commit/${{github.sha}}
-              сообщение в коммите: ${{ github.event.commits[0].message }}
+              Айда смотреть изменения 
+              
+              https://github.com/${{ github.repository }}/commit/${{github.sha}}
+              
+              Cообщение в коммите:
+              ${{ github.event.commits[0].message }}
             sticker: CAACAgIAAxkBAAENeERngC-DukdGxbt5IGz1u5uZMSsUxQACAUUAAgPL8EiSZgZCWgbx6zYE
