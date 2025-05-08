@@ -19,9 +19,6 @@ terraform {
     skip_requesting_account_id  = true
     skip_s3_checksum            = true
     force_path_style            = true
-
-    access_key = "YCAJEParPRwQ08rLUNTF7Hqlj"
-    secret_key = "YCNynHCpLSH_XtolW83wT_gwKKsJGw5ds-YlH0JL"
   }
 }
 
