@@ -7,7 +7,6 @@ variable "yc_folder_id" {
 variable "yc_token" {
   description = "Токен в Yandex Cloud"
   type        = string
-  default     = "y0__xC70YHHARjB3RMgrZKuhhPpM76yuvyidEl1pxjyv_2e_50QKQ"
 }
 
 variable "yc_cloud_id" {
