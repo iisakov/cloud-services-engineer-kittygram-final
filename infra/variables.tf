@@ -63,10 +63,11 @@ variable "disk_size" {
   type        = number
 }
 
-variable "ssh_key" {
-  description = "ID образа Ubuntu 24.04 LTS"
-  type        = string
+variable "ssh_public_key" {
+  description = "Публичный ключ ssh"
+  type    = string
 }
+
 
 # vps
 variable "vpc_name" {
