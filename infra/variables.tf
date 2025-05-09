@@ -65,7 +65,7 @@ variable "disk_size" {
 
 variable "ssh_public_key" {
   description = "Публичный ключ ssh"
-  type    = string
+  type        = string
 }
 
 
