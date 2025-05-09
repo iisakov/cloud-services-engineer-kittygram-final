@@ -1,0 +1,10 @@
+platform_id   = "standard-v2"
+cores         = 2
+memory        = 1
+disk_size     = 10
+core_fraction = "5"
+disk_type     = "network-hdd"
+ssh_key       = ""
+image_family  = "ubuntu-2404-lts-oslogin"
+vm_name       = "terraform-vm"
+vpc_name      = "terraform-vps"

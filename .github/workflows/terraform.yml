@@ -45,15 +45,14 @@ jobs:
       - name: Setup YC CLI
         run: |
           curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
-          echo "${{ secrets.YC_SERVICE_ACCOUNT_KEY }}" | base64 -d > ~/.yc/authorized_key.json
-          yc config set token ${{ secrets.YC_TOKEN }}
+          echo "${{ secrets.YC_SERVICE_ACCOUNT_KEY }}" | base64 -d > ~/.yc/key.json
 
       - name: Terraform Init
         run: |
           terraform init \
-            -backend-config="access_key=${{ secrets.YC_STORAGE_ACCESS_KEY }}" \
-            -backend-config="secret_key=${{ secrets.YC_STORAGE_SECRET_KEY }}" \
-            -backend-config="bucket=${{ secrets.YC_STORAGE_BUCKET }}" \
+            -backend-config="access_key=${{ secrets.ACCESS_KEY }}" \
+            -backend-config="secret_key=${{ secrets.SECRET_KEY }}" \
+            -backend-config="bucket=${{ secrets.STORAGE_BUCKET }}" \
             -backend-config="region=ru-central1"
 
       - name: Terraform Plan
