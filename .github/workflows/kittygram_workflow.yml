@@ -113,7 +113,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             set -e
-
+            sudo docker -v
             echo "Переходим в папку проекта"
             cd ./kittygram
 
