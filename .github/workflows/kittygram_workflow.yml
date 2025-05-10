@@ -119,7 +119,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SERVER_PASSPHRASE }}
           source: ".env"
-          target: "./kittygram/.env"
+          target: "./kittygram/"
       - name: Deploy application
         uses: appleboy/ssh-action@v0.1.9
         with:
