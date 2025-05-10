@@ -108,6 +108,8 @@ jobs:
       - name: Export env
         run: |
           echo "TEST=${{ secrets.TEST }}" >> .env
+          cat .env
+          pwd
       - name: Deploy application
         uses: appleboy/ssh-action@v0.1.9
         with:
