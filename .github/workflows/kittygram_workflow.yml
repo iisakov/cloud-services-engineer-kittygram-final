@@ -109,9 +109,7 @@ jobs:
         uses: 0ndt/envfile@v2
         with:
           secrets: ${{ toJSON(secrets) }}
-          file: .env
-      - run: |
-          echo "Value of TEST: $TEST"
+          file: "./.env"
       - name: Deploy application
         uses: appleboy/ssh-action@v0.1.9
         with:
