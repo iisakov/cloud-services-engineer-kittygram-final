@@ -6,6 +6,8 @@ data "yandex_compute_image" "image" {
   family = var.image_family
 }
 
+
+
 resource "yandex_compute_instance" "vm_1" {
   name        = var.vm_name
   hostname    = var.vm_name
@@ -30,6 +32,7 @@ resource "yandex_compute_instance" "vm_1" {
     subnet_id          = yandex_vpc_subnet.infra_subnet[0].id
     nat                = true
     security_group_ids = [yandex_vpc_security_group.infra_sg.id]
+    nat_ip_address     = "158.160.115.213"
   }
 
   metadata = {

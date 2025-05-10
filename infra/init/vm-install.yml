@@ -6,39 +6,45 @@ users:
     shell: /bin/bash
     ssh-authorized-keys:
       - "${SSH_KEY}"
+
+package_update: true
+packages:
+  - ca-certificates
+  - curl
+  - gnupg
+  - lsb-release
+
 write_files:
-  - path: "/root/vm_require.sh"
-    permissions: "0744"
-    content: |
+  - content: |
       #!/bin/bash
       set -e
 
-      sudo apt-get update
-      sudo apt-get install -y \
-        ca-certificates \
-        curl \
-        gnupg \
-        lsb-release \
-        software-properties-common
+      # 1. Установка Docker из официального репозитория
+      echo "============================================"
+      echo "Установка Docker из официального репозитория"
+      echo "============================================"
+      install -m 0755 -d /etc/apt/keyrings
+      curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+      echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
 
-      sudo install -m 0755 -d /etc/apt/keyrings
-      curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
-        gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+      apt-get update -qq
+      apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-      echo \
-        "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
-        https://download.docker.com/linux/ubuntu \
-        $(lsb_release -cs) stable" | \
-        sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-      sudo apt-get update
-      sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
-      systemctl enable docker
-      systemctl start docker
+      # 2. Настройка прав и сервиса
+      echo "========================"
+      echo "Настройка прав и сервиса"
+      echo "========================"
       usermod -aG docker user
+      systemctl enable --now docker
+
+      # 3. Проверка
+      echo "========"
+      echo "Проверка"
+      echo "========"
+      echo "Docker: $(docker --version)"
+      echo "Docker Compose (plugin): $(docker compose version)"
+    path: "/root/install-docker.sh"
+    permissions: "0740"
 
 runcmd:
-  - sleep 120
-  - sudo -i
-  - /root/vm_prep.sh
+  - bash /root/install-docker.sh > /var/log/docker-install.log 2>&1
